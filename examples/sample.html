@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>示例：登录方案与上线检查 · 思路脑图</title>
+<style>
+:root { color-scheme: light; }
+body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0; padding: 32px; background: #f7f7f5; color: #23221f; }
+h1 { font-size: 20px; font-weight: 600; margin: 0 0 8px; }
+.hint { font-size: 13px; color: #6b6963; margin-bottom: 12px; }
+.legend { font-size: 12px; color: #6b6963; margin-bottom: 24px; }
+.legend span { display: inline-block; margin-right: 16px; }
+.key { display: inline-block; width: 22px; height: 3px; vertical-align: middle; margin-right: 6px; border-radius: 2px; background: #185fa5; }
+.swatch { display: inline-block; width: 14px; height: 10px; vertical-align: middle; margin-right: 6px; border-radius: 3px; border: 1px solid; }
+.map { width: 100%; overflow: auto; border: 1px solid #e3e1da; border-radius: 12px; background: #fafaf8; margin-bottom: 28px; }
+.map svg { display: block; }
+
+.map-wrap { position: relative; margin-bottom: 28px; }
+.map { max-height: 70vh; margin-bottom: 0; cursor: grab; user-select: none; }
+.map.dragging { cursor: grabbing; }
+.map-reset { position: absolute; top: 10px; right: 10px; z-index: 1; padding: 6px 10px; border: 1px solid #c9c8c0; border-radius: 6px; background: #fff; color: #23221f; cursor: pointer; }
+
+.details-title { font-size: 14px; font-weight: 500; margin: 24px 0 12px; color: #5f5e5a; }
+.turn { background: #fff; border: 1px solid #e3e1da; border-left: 3px solid #185fa5; border-radius: 10px; margin-bottom: 12px; padding: 12px 16px; }
+summary { cursor: pointer; font-size: 14px; line-height: 1.6; }
+.badge { display: inline-block; background: #e6f1fb; color: #0c447c; border-radius: 5px; padding: 1px 7px; margin-right: 8px; font-size: 12px; }
+.q { margin-top: 10px; font-size: 14px; line-height: 1.7; white-space: pre-wrap; }
+.a { margin-top: 8px; padding: 10px 12px; background: #f1f8f4; border-radius: 6px; font-size: 13px; line-height: 1.7; white-space: pre-wrap; }
+.next { margin-top: 8px; padding: 8px 12px; background: #fdf3e3; border-radius: 6px; font-size: 13px; line-height: 1.7; color: #7a4f0c; }
+.meta { margin-top: 8px; font-size: 12px; color: #888780; }
+</style>
+</head>
+<body>
+<h1>示例：登录方案与上线检查</h1>
+<div class="hint">大模型把 6 组问答重组为 6 个节点 · 颜色对应不同话题线 · 每个节点是一组问答体</div>
+<div class="legend"><span><i class="swatch" style="background:#E6F1FB;border-color:#185FA5"></i>设计登录入口</span><span><i class="swatch" style="background:#E1F5EE;border-color:#0F6E56"></i>准备上线检查</span><span><i class="key"></i>连线：话题关系</span><span>↩ 待你回应：该轮结尾留给你的问题</span></div>
+<div class="map-wrap"><button class="map-reset" type="button" aria-label="复位脑图位置">复位</button><div class="map"><svg xmlns="http://www.w3.org/2000/svg" width="1350" height="700" viewBox="0 0 1350 700" role="img">
+<title>示例：登录方案与上线检查 · 思路演化脑图</title>
+<desc>6 组问答，按话题和父子关系排列</desc>
+<rect class="canvas" x="0" y="0" width="1350" height="700" fill="#FAFAF8"/>
+<text class="map-title" x="40" y="30" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="16" font-weight="600" fill="#23221F" text-anchor="start" dominant-baseline="central">示例：登录方案与上线检查</text>
+<text class="map-caption" x="40" y="52" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#6B6963" text-anchor="start" dominant-baseline="central">共 6 组问答 · 颜色=所属话题线 · 连线=话题关系 · ↩ 待你回应=该轮结尾留给你的问题</text>
+<path class="edge" d="M445 212 C445 269, 240 269, 240 326" fill="none" stroke="#185FA5" stroke-width="2.5"/>
+<path class="edge" d="M445 212 C445 269, 650 269, 650 326" fill="none" stroke="#185FA5" stroke-width="2.5"/>
+<path class="edge" d="M240 414 C240 471, 240 471, 240 528" fill="none" stroke="#185FA5" stroke-width="2.5"/>
+<path class="edge" d="M1060 204 C1060 265, 1060 265, 1060 326" fill="none" stroke="#0F6E56" stroke-width="2.5"/>
+<rect class="node-box root" data-chain="蓝" x="265" y="108" width="360" height="104" rx="10" fill="#B5D4F4" stroke="#185FA5" stroke-width="1.75"/>
+<text class="node-head" x="277" y="128" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="600" fill="#185FA5" text-anchor="start" dominant-baseline="central">设计登录入口</text>
+<text class="node-q" x="277" y="144" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="400" fill="#23221F" text-anchor="start" dominant-baseline="central">Q：先做哪种登录方式？</text>
+<text class="node-a" x="277" y="160" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#5F5E5A" text-anchor="start" dominant-baseline="central">A：先做邮箱登录，统一会话接口。</text>
+<text class="node-next" x="277" y="176" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="500" fill="#8A5A10" text-anchor="start" dominant-baseline="central">↩ 待你回应：确认是否先只做邮箱登录</text>
+<text class="node-ref" x="277" y="202" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#185FA5" text-anchor="start" dominant-baseline="central">第 1 轮</text>
+<rect class="node-box" data-chain="蓝" x="60" y="326" width="360" height="88" rx="10" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+<text class="node-head" x="72" y="346" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="600" fill="#185FA5" text-anchor="start" dominant-baseline="central">保持登录状态</text>
+<text class="node-q" x="72" y="362" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="400" fill="#23221F" text-anchor="start" dominant-baseline="central">Q：凭证过期后怎么处理？</text>
+<text class="node-a" x="72" y="378" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#5F5E5A" text-anchor="start" dominant-baseline="central">A：先静默刷新，失败后引导重新登录。</text>
+<text class="node-ref" x="72" y="404" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#185FA5" text-anchor="start" dominant-baseline="central">第 2 轮</text>
+<rect class="node-box" data-chain="蓝" x="470" y="326" width="360" height="88" rx="10" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+<text class="node-head" x="482" y="346" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="600" fill="#185FA5" text-anchor="start" dominant-baseline="central">评估第三方登录</text>
+<text class="node-q" x="482" y="362" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="400" fill="#23221F" text-anchor="start" dominant-baseline="central">Q：以后接 GitHub 登录要改什么？</text>
+<text class="node-a" x="482" y="378" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#5F5E5A" text-anchor="start" dominant-baseline="central">A：沿用会话接口，单独实现第三方回调。</text>
+<text class="node-ref" x="482" y="404" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#185FA5" text-anchor="start" dominant-baseline="central">第 3 轮</text>
+<rect class="node-box" data-chain="蓝" x="60" y="528" width="360" height="104" rx="10" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+<text class="node-head" x="72" y="548" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="600" fill="#185FA5" text-anchor="start" dominant-baseline="central">处理刷新失败</text>
+<text class="node-q" x="72" y="564" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="400" fill="#23221F" text-anchor="start" dominant-baseline="central">Q：刷新失败时如何保留输入？</text>
+<text class="node-a" x="72" y="580" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#5F5E5A" text-anchor="start" dominant-baseline="central">A：保留草稿，登录后恢复。</text>
+<text class="node-next" x="72" y="596" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="500" fill="#8A5A10" text-anchor="start" dominant-baseline="central">↩ 待你回应：确认草稿保存策略</text>
+<text class="node-ref" x="72" y="622" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#185FA5" text-anchor="start" dominant-baseline="central">第 4 轮</text>
+<rect class="node-box root" data-chain="青" x="880" y="116" width="360" height="88" rx="10" fill="#9FE1CB" stroke="#0F6E56" stroke-width="1.75"/>
+<text class="node-head" x="892" y="136" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="600" fill="#0F6E56" text-anchor="start" dominant-baseline="central">准备上线检查</text>
+<text class="node-q" x="892" y="152" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="400" fill="#23221F" text-anchor="start" dominant-baseline="central">Q：上线前至少验证什么？</text>
+<text class="node-a" x="892" y="168" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#5F5E5A" text-anchor="start" dominant-baseline="central">A：验证登录、退出和会话过期。</text>
+<text class="node-ref" x="892" y="194" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0F6E56" text-anchor="start" dominant-baseline="central">第 5 轮</text>
+<rect class="node-box" data-chain="青" x="880" y="326" width="360" height="88" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+<text class="node-head" x="892" y="346" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="600" fill="#0F6E56" text-anchor="start" dominant-baseline="central">记录验收结果</text>
+<text class="node-q" x="892" y="362" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="400" fill="#23221F" text-anchor="start" dominant-baseline="central">Q：怎么留验收记录？</text>
+<text class="node-a" x="892" y="378" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#5F5E5A" text-anchor="start" dominant-baseline="central">A：记录版本、检查项和结果。</text>
+<text class="node-ref" x="892" y="404" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0F6E56" text-anchor="start" dominant-baseline="central">第 6 轮</text>
+</svg>
+</div></div>
+<div class="details-title">节点明细</div>
+<details class="turn" style="border-left-color:#185FA5" open>
+  <summary><span class="badge" style="background:#E6F1FB;color:#0C447C">设计登录入口</span> 我们要加一个登录入口，第一版先做邮箱登录，还是同时接入第三方登录？</summary>
+  <div class="q"><b>提问原文</b> 我们要加一个登录入口，第一版先做邮箱登录，还是同时接入第三方登录？</div>
+  <div class="a"><b>回答原文</b> 建议第一版只做邮箱登录。先统一登录成功后的会话接口，将来添加第三方登录时可以复用。
+
+你希望第一版只做邮箱登录吗？</div>
+  <div class="meta">第 1 轮 · 提问 u1 · 回答 a1 · id n1 · parent —</div>
+</details>
+<details class="turn" style="border-left-color:#185FA5">
+  <summary><span class="badge" style="background:#E6F1FB;color:#0C447C">保持登录状态</span> 先只做邮箱登录。用户打开页面时，如果登录凭证过期了，怎样处理才不会打断使用？</summary>
+  <div class="q"><b>提问原文</b> 先只做邮箱登录。用户打开页面时，如果登录凭证过期了，怎样处理才不会打断使用？</div>
+  <div class="a"><b>回答原文</b> 先尝试静默刷新。如果刷新也失败，再提示用户重新登录。返回页面时保留用户原本要访问的位置。</div>
+  <div class="meta">第 2 轮 · 提问 u2 · 回答 a2 · id n2 · parent n1</div>
+</details>
+<details class="turn" style="border-left-color:#185FA5">
+  <summary><span class="badge" style="background:#E6F1FB;color:#0C447C">评估第三方登录</span> 如果下一版接入 GitHub 登录，现有的邮箱登录流程要重写吗？</summary>
+  <div class="q"><b>提问原文</b> 如果下一版接入 GitHub 登录，现有的邮箱登录流程要重写吗？</div>
+  <div class="a"><b>回答原文</b> 不需要。GitHub 登录单独处理授权回调，成功后和邮箱登录一样调用现有会话接口。</div>
+  <div class="meta">第 3 轮 · 提问 u3 · 回答 a3 · id n3 · parent n1</div>
+</details>
+<details class="turn" style="border-left-color:#185FA5">
+  <summary><span class="badge" style="background:#E6F1FB;color:#0C447C">处理刷新失败</span> 如果静默刷新也失败，用户输入到一半的内容怎么办？</summary>
+  <div class="q"><b>提问原文</b> 如果静默刷新也失败，用户输入到一半的内容怎么办？</div>
+  <div class="a"><b>回答原文</b> 先在本地保留未提交的表单内容，再引导用户重新登录。登录成功返回原页面后，恢复这些内容并提醒用户检查。</div>
+  <div class="meta">第 4 轮 · 提问 u4 · 回答 a4 · id n4 · parent n2</div>
+</details>
+<details class="turn" style="border-left-color:#0F6E56" open>
+  <summary><span class="badge" style="background:#E1F5EE;color:#085041">准备上线检查</span> 换个话题：上线前我们至少要走一遍哪些场景？</summary>
+  <div class="q"><b>提问原文</b> 换个话题：上线前我们至少要走一遍哪些场景？</div>
+  <div class="a"><b>回答原文</b> 至少走一遍三条路径：
+1. 正常登录并进入首页。
+2. 退出后无法继续访问受保护页面。
+3. 会话过期后能重新登录。</div>
+  <div class="meta">第 5 轮 · 提问 u5 · 回答 a5 · id n5 · parent —</div>
+</details>
+<details class="turn" style="border-left-color:#0F6E56">
+  <summary><span class="badge" style="background:#E1F5EE;color:#085041">记录验收结果</span> 这些检查由不同同事执行，怎么记录结果方便交接？</summary>
+  <div class="q"><b>提问原文</b> 这些检查由不同同事执行，怎么记录结果方便交接？</div>
+  <div class="a"><b>回答原文</b> 用同一张验收表记录版本、检查项、执行人和结果。失败项附上简短说明，复测通过后更新状态。</div>
+  <div class="meta">第 6 轮 · 提问 u6 · 回答 a6 · id n6 · parent n5</div>
+</details>
+<script>
+(() => {
+  const map = document.querySelector(".map");
+  const reset = document.querySelector(".map-reset");
+  let drag = null;
+  map.addEventListener("pointerdown", (event) => {
+    if (event.pointerType !== "mouse" || event.button !== 0) return;
+    drag = { id: event.pointerId, x: event.clientX, y: event.clientY, left: map.scrollLeft, top: map.scrollTop };
+    map.setPointerCapture(event.pointerId);
+    map.classList.add("dragging");
+    event.preventDefault();
+  });
+  map.addEventListener("pointermove", (event) => {
+    if (!drag || event.pointerId !== drag.id) return;
+    map.scrollLeft = drag.left - (event.clientX - drag.x);
+    map.scrollTop = drag.top - (event.clientY - drag.y);
+  });
+  const endDrag = (event) => {
+    if (!drag || event.pointerId !== drag.id) return;
+    drag = null;
+    map.classList.remove("dragging");
+  };
+  map.addEventListener("pointerup", endDrag);
+  map.addEventListener("pointercancel", endDrag);
+  map.addEventListener("lostpointercapture", endDrag);
+  reset.addEventListener("click", () => { map.scrollLeft = 0; map.scrollTop = 0; });
+})();
+</script>
+</body>
+</html>

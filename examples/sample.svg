@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1350" height="700" viewBox="0 0 1350 700" role="img">
+<title>示例：登录方案与上线检查 · 思路演化脑图</title>
+<desc>6 组问答，按话题和父子关系排列</desc>
+<rect class="canvas" x="0" y="0" width="1350" height="700" fill="#FAFAF8"/>
+<text class="map-title" x="40" y="30" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="16" font-weight="600" fill="#23221F" text-anchor="start" dominant-baseline="central">示例：登录方案与上线检查</text>
+<text class="map-caption" x="40" y="52" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#6B6963" text-anchor="start" dominant-baseline="central">共 6 组问答 · 颜色=所属话题线 · 连线=话题关系 · ↩ 待你回应=该轮结尾留给你的问题</text>
+<path class="edge" d="M445 212 C445 269, 240 269, 240 326" fill="none" stroke="#185FA5" stroke-width="2.5"/>
+<path class="edge" d="M445 212 C445 269, 650 269, 650 326" fill="none" stroke="#185FA5" stroke-width="2.5"/>
+<path class="edge" d="M240 414 C240 471, 240 471, 240 528" fill="none" stroke="#185FA5" stroke-width="2.5"/>
+<path class="edge" d="M1060 204 C1060 265, 1060 265, 1060 326" fill="none" stroke="#0F6E56" stroke-width="2.5"/>
+<rect class="node-box root" data-chain="蓝" x="265" y="108" width="360" height="104" rx="10" fill="#B5D4F4" stroke="#185FA5" stroke-width="1.75"/>
+<text class="node-head" x="277" y="128" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="600" fill="#185FA5" text-anchor="start" dominant-baseline="central">设计登录入口</text>
+<text class="node-q" x="277" y="144" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="400" fill="#23221F" text-anchor="start" dominant-baseline="central">Q：先做哪种登录方式？</text>
+<text class="node-a" x="277" y="160" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#5F5E5A" text-anchor="start" dominant-baseline="central">A：先做邮箱登录，统一会话接口。</text>
+<text class="node-next" x="277" y="176" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="500" fill="#8A5A10" text-anchor="start" dominant-baseline="central">↩ 待你回应：确认是否先只做邮箱登录</text>
+<text class="node-ref" x="277" y="202" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#185FA5" text-anchor="start" dominant-baseline="central">第 1 轮</text>
+<rect class="node-box" data-chain="蓝" x="60" y="326" width="360" height="88" rx="10" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+<text class="node-head" x="72" y="346" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="600" fill="#185FA5" text-anchor="start" dominant-baseline="central">保持登录状态</text>
+<text class="node-q" x="72" y="362" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="400" fill="#23221F" text-anchor="start" dominant-baseline="central">Q：凭证过期后怎么处理？</text>
+<text class="node-a" x="72" y="378" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#5F5E5A" text-anchor="start" dominant-baseline="central">A：先静默刷新，失败后引导重新登录。</text>
+<text class="node-ref" x="72" y="404" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#185FA5" text-anchor="start" dominant-baseline="central">第 2 轮</text>
+<rect class="node-box" data-chain="蓝" x="470" y="326" width="360" height="88" rx="10" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+<text class="node-head" x="482" y="346" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="600" fill="#185FA5" text-anchor="start" dominant-baseline="central">评估第三方登录</text>
+<text class="node-q" x="482" y="362" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="400" fill="#23221F" text-anchor="start" dominant-baseline="central">Q：以后接 GitHub 登录要改什么？</text>
+<text class="node-a" x="482" y="378" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#5F5E5A" text-anchor="start" dominant-baseline="central">A：沿用会话接口，单独实现第三方回调。</text>
+<text class="node-ref" x="482" y="404" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#185FA5" text-anchor="start" dominant-baseline="central">第 3 轮</text>
+<rect class="node-box" data-chain="蓝" x="60" y="528" width="360" height="104" rx="10" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+<text class="node-head" x="72" y="548" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="600" fill="#185FA5" text-anchor="start" dominant-baseline="central">处理刷新失败</text>
+<text class="node-q" x="72" y="564" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="400" fill="#23221F" text-anchor="start" dominant-baseline="central">Q：刷新失败时如何保留输入？</text>
+<text class="node-a" x="72" y="580" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#5F5E5A" text-anchor="start" dominant-baseline="central">A：保留草稿，登录后恢复。</text>
+<text class="node-next" x="72" y="596" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="500" fill="#8A5A10" text-anchor="start" dominant-baseline="central">↩ 待你回应：确认草稿保存策略</text>
+<text class="node-ref" x="72" y="622" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#185FA5" text-anchor="start" dominant-baseline="central">第 4 轮</text>
+<rect class="node-box root" data-chain="青" x="880" y="116" width="360" height="88" rx="10" fill="#9FE1CB" stroke="#0F6E56" stroke-width="1.75"/>
+<text class="node-head" x="892" y="136" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="600" fill="#0F6E56" text-anchor="start" dominant-baseline="central">准备上线检查</text>
+<text class="node-q" x="892" y="152" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="400" fill="#23221F" text-anchor="start" dominant-baseline="central">Q：上线前至少验证什么？</text>
+<text class="node-a" x="892" y="168" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#5F5E5A" text-anchor="start" dominant-baseline="central">A：验证登录、退出和会话过期。</text>
+<text class="node-ref" x="892" y="194" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0F6E56" text-anchor="start" dominant-baseline="central">第 5 轮</text>
+<rect class="node-box" data-chain="青" x="880" y="326" width="360" height="88" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+<text class="node-head" x="892" y="346" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="600" fill="#0F6E56" text-anchor="start" dominant-baseline="central">记录验收结果</text>
+<text class="node-q" x="892" y="362" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="400" fill="#23221F" text-anchor="start" dominant-baseline="central">Q：怎么留验收记录？</text>
+<text class="node-a" x="892" y="378" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#5F5E5A" text-anchor="start" dominant-baseline="central">A：记录版本、检查项和结果。</text>
+<text class="node-ref" x="892" y="404" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0F6E56" text-anchor="start" dominant-baseline="central">第 6 轮</text>
+</svg>

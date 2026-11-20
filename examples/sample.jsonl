@@ -1,0 +1,6 @@
+{"sessionId":"sample","sessionTitle":"示例：登录方案与上线检查","turn":1,"questionId":"u1","answerId":"a1","question":"我们要加一个登录入口，第一版先做邮箱登录，还是同时接入第三方登录？","answer":"建议第一版只做邮箱登录。先统一登录成功后的会话接口，将来添加第三方登录时可以复用。\n\n你希望第一版只做邮箱登录吗？","finish":"stop"}
+{"sessionId":"sample","sessionTitle":"示例：登录方案与上线检查","turn":2,"questionId":"u2","answerId":"a2","question":"先只做邮箱登录。用户打开页面时，如果登录凭证过期了，怎样处理才不会打断使用？","answer":"先尝试静默刷新。如果刷新也失败，再提示用户重新登录。返回页面时保留用户原本要访问的位置。","finish":"stop"}
+{"sessionId":"sample","sessionTitle":"示例：登录方案与上线检查","turn":3,"questionId":"u3","answerId":"a3","question":"如果下一版接入 GitHub 登录，现有的邮箱登录流程要重写吗？","answer":"不需要。GitHub 登录单独处理授权回调，成功后和邮箱登录一样调用现有会话接口。","finish":"stop"}
+{"sessionId":"sample","sessionTitle":"示例：登录方案与上线检查","turn":4,"questionId":"u4","answerId":"a4","question":"如果静默刷新也失败，用户输入到一半的内容怎么办？","answer":"先在本地保留未提交的表单内容，再引导用户重新登录。登录成功返回原页面后，恢复这些内容并提醒用户检查。","finish":"stop"}
+{"sessionId":"sample","sessionTitle":"示例：登录方案与上线检查","turn":5,"questionId":"u5","answerId":"a5","question":"换个话题：上线前我们至少要走一遍哪些场景？","answer":"至少走一遍三条路径：\n1. 正常登录并进入首页。\n2. 退出后无法继续访问受保护页面。\n3. 会话过期后能重新登录。","finish":"stop"}
+{"sessionId":"sample","sessionTitle":"示例：登录方案与上线检查","turn":6,"questionId":"u6","answerId":"a6","question":"这些检查由不同同事执行，怎么记录结果方便交接？","answer":"用同一张验收表记录版本、检查项、执行人和结果。失败项附上简短说明，复测通过后更新状态。","finish":"stop"}
